@@ -112,7 +112,7 @@ Project/
 ## 🚀 使用说明
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/y/your-repo-name.git
+   git clone https://github.com/xiaopang0808/STM32F103C8T6-Learning-Note.git
    ```
 2. 使用Keil MDK5打开工程文件：  
    `MDK-ARM/YourProjectName.uvprojx`
@@ -146,5 +146,6 @@ Project/
 
 ---
 🙋 如有问题请联系：  
-[![GitHub Issues](https://img.shields.io/github/issues/your-username/your-repo-name)](https://github.com/your-username/your-repo-name/issues)  
-📧 Email: your.email@example.com
+[![GitHub Issues](https://img.shields.io/github/issues/xiaopang0808/STM32F103C8T6-Learning-Note)](https://github.com/xiaopang0808/STM32F103C8T6-Learning-Note/issues)  
+📚 仓库地址：  
+https://github.com/xiaopang0808/STM32F103C8T6-Learning-Note.git
