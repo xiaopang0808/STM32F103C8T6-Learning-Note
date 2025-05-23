@@ -2,7 +2,7 @@
 #include "MySPI.h"
 #include "W25Q64_Ins.h"
 
-
+//Flash闪存模块
 void W25Q64_Init(void){
     MySPI_Init();
 }

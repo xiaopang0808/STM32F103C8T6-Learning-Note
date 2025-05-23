@@ -883,6 +883,16 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\W25Q64_Ins.h</FilePath>
             </File>
+            <File>
+              <FileName>UltraSound.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\UltraSound.c</FilePath>
+            </File>
+            <File>
+              <FileName>UltraSound.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\UltraSound.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -919,5 +929,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>Project</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

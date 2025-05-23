@@ -49,6 +49,10 @@ void PWM_Init(void){
 void PWM_SetCompare1(int compare){
     TIM_SetCompare1(TIM2,compare);
 }
+//调节PWM占空比
+void PWM_SetCompare3(int compare){
+    TIM_SetCompare1(TIM2,compare);
+}
 
 //调节频率
 void PWM_SetPrescaler(int Prescaler){
