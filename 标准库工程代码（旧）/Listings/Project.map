@@ -115,8 +115,8 @@ Section Cross References
     led.o(i.LED_Init) refers to stm32f10x_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
     key.o(i.KEY_Init) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
     key.o(i.KEY_Init) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
-    key.o(i.Key_GetNum) refers to stm32f10x_gpio.o(i.GPIO_ReadInputDataBit) for GPIO_ReadInputDataBit
-    key.o(i.Key_GetNum) refers to delay.o(i.Delay_ms) for Delay_ms
+    key.o(i.Key_Scan_Loop) refers to stm32f10x_gpio.o(i.GPIO_ReadInputDataBit) for GPIO_ReadInputDataBit
+    key.o(i.Key_Scan_Loop) refers to delay.o(i.Delay_ms) for Delay_ms
     buzzer.o(i.Buzzer_Init) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
     buzzer.o(i.Buzzer_Init) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
     buzzer.o(i.Buzzer_Init) refers to stm32f10x_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
@@ -1054,7 +1054,7 @@ Removing Unused input sections from the image.
     Removing led.o(i.LED1_Turn), (44 bytes).
     Removing led.o(i.LED_Init), (56 bytes).
     Removing key.o(i.KEY_Init), (44 bytes).
-    Removing key.o(i.Key_GetNum), (52 bytes).
+    Removing key.o(i.Key_Scan_Loop), (132 bytes).
     Removing buzzer.o(i.Buzzer_Init), (52 bytes).
     Removing buzzer.o(i.Buzzer_OFF), (16 bytes).
     Removing buzzer.o(i.Buzzer_ON), (16 bytes).
@@ -1161,7 +1161,7 @@ Removing Unused input sections from the image.
     Removing dsqrt.o(.text), (162 bytes).
     Removing cdcmple.o(.text), (48 bytes).
 
-588 unused section(s) (total 27159 bytes) removed from the image.
+588 unused section(s) (total 27239 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1541,22 +1541,22 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
          0          0          0          0          0       4540   core_cm3.o
-        22          0          0          0          0        451   countsensor.o
-       104         20          0          2          0       1114   encoder.o
-        24          6          0          0          0        411   main.o
-         0          0          0          0          0     201676   misc.o
-       734         22       1520          0          0       6195   oled.o
-       136         20          0         11          0       1284   serial.o
+        22          0          0          0          0        479   countsensor.o
+       104         20          0          2          0       1198   encoder.o
+        24          6          0          0          0        439   main.o
+         0          0          0          0          0     201704   misc.o
+       734         22       1520          0          0       6559   oled.o
+       136         20          0         11          0       1368   serial.o
         36          8        236          0       1024        768   startup_stm32f10x_md.o
-        52         12          0          0          0       1036   stm32f10x_exti.o
-       306          0          0          0          0      11280   stm32f10x_gpio.o
-        26          0          0          0          0       3638   stm32f10x_it.o
-        32          6          0          0          0        525   stm32f10x_rcc.o
-        94          0          0          0          0       8584   stm32f10x_usart.o
-       328         28          0          0          0      10105   system_stm32f10x.o
+        52         12          0          0          0       1092   stm32f10x_exti.o
+       306          0          0          0          0      11420   stm32f10x_gpio.o
+        26          0          0          0          0       3890   stm32f10x_it.o
+        32          6          0          0          0        553   stm32f10x_rcc.o
+        94          0          0          0          0       8696   stm32f10x_usart.o
+       328         28          0          0          0      10245   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-      1906        122       1788         16       1024     251607   Object Totals
+      1906        122       1788         16       1024     252951   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         12          0          0          3          0          0   (incl. Padding)
 
@@ -1595,8 +1595,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1992        138       1788         16       1024     250163   Grand Totals
-      1992        138       1788         16       1024     250163   ELF Image Totals
+      1992        138       1788         16       1024     251507   Grand Totals
+      1992        138       1788         16       1024     251507   ELF Image Totals
       1992        138       1788         16          0          0   ROM Totals
 
 ==============================================================================
