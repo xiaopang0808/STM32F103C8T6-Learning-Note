@@ -1,220 +1,208 @@
-# STM32F103C8T6 Keil5 学习工程
+# STM32F103C8T6 学习工程合集
 
 ![STM32F103C8T6](https://img.shields.io/badge/STM32F103C8T6-Blue%20Pill-blue)
 ![Keil MDK](https://img.shields.io/badge/IDE-Keil%20MDK5-green)
+![HAL库](https://img.shields.io/badge/HAL%20Library-supported-brightgreen)
+![标准库](https://img.shields.io/badge/Standard%20Library-supported-yellow)
 
-本仓库包含基于 ​**STM32F103C8T6**​（最小系统板）的Keil MDK5工程示例代码，用于学习STM32基础外设开发。
+本仓库是一个全面的STM32F103C8T6（最小系统板）学习资源合集，包含多种开发方式的工程示例、详细文档和实用模板，适合STM32初学者和进阶开发者使用。
 
 ## 📋 目录
+- [项目概述](#-项目概述)
 - [硬件要求](#-硬件要求)
 - [开发环境](#-开发环境)
-- [工程结构](#-工程结构)
-- [使用说明](#-使用说明)
+- [仓库结构](#-仓库结构)
+- [工程介绍](#-工程介绍)
+  - [HAL库学习工程](#hal库学习工程)
+  - [标准库学习工程](#标准库学习工程)
+  - [标准库工程代码（旧）](#标准库工程代码旧)
+  - [空白工程模板](#空白工程模板)
 - [示例功能](#-示例功能)
+- [使用说明](#-使用说明)
 - [注意事项](#-注意事项)
 - [许可证](#-许可证)
 
+## 📝 项目概述
+本仓库提供了基于STM32F103C8T6微控制器的全面学习资源，涵盖了从基础到进阶的各种开发场景。仓库包含：
+- 多种库开发方式（HAL库、标准库、寄存器）的工程示例
+- 丰富的外设驱动代码和例程
+- 详细的技术文档和参考资料
+- 可直接使用的工程模板
+- 实用的开发工具和脚本
+
 ## 🛠️ 硬件要求
 ### 开发板与调试工具
-- ✅ ​**STM32F103C8T6 核心板**​（最小系统板）
-- ✅ ​**ST-Link V2 下载器**​（或兼容的J-Link、DAP-Link）
-- ✅ ​**CH340 USB转串口模块**​（UART通信）
+- ✅ **STM32F103C8T6 核心板**（最小系统板/蓝桥板）
+- ✅ **ST-Link V2 下载器**（或兼容的J-Link、DAP-Link）
+- ✅ **CH340 USB转串口模块**（UART通信调试）
 
-### 传感器模块
-- ✅ ​**光敏电阻传感器**​（环境光强度检测）
-- ✅ ​**热敏电阻传感器**​（温度检测）
-- ✅ ​**反射式红外传感器**​（障碍物检测）
-- ✅ ​**对射式红外传感器**​（物体通过检测）
-- ✅ ​**MPU6050 模块**​（陀螺仪 & 加速度计）
+### 常用传感器模块
+- ✅ **光敏电阻传感器**（环境光强度检测）
+- ✅ **热敏电阻传感器**（温度检测）
+- ✅ **反射式红外传感器**（障碍物检测）
+- ✅ **对射式红外传感器**（物体通过检测）
+- ✅ **MPU6050 模块**（陀螺仪 & 加速度计）
+- ✅ **超声波传感器**（距离测量）
 
 ### 执行器模块
-- ✅ ​**有源蜂鸣器模块**​（报警提示音）
-- ✅ ​**SG90 舵机**​（角度控制）
-- ✅ ​**TB6612 电机驱动模块**​（直流电机控制）
+- ✅ **有源蜂鸣器模块**（报警提示音）
+- ✅ **SG90 舵机**（角度控制）
+- ✅ **TB6612 电机驱动模块**（直流电机控制）
 
 ### 显示与存储
-- ✅ ​**0.96寸OLED显示屏**​（4针脚，I2C接口，用于数据可视化）
-- ✅ ​**W25QXX Flash模块**​（W25Q64/W25Q128，外部存储数据）
+- ✅ **0.96寸OLED显示屏**（4针脚，I2C接口，用于数据可视化）
+- ✅ **W25QXX Flash模块**（W25Q64/W25Q128，外部存储数据）
 
 ### 输入设备
-- ✅ ​**旋转编码器**​（旋钮位置检测）
-- ✅ ​**按键模块**​（用户输入）
-- ✅ ​**LED模块**​（状态指示）
-
-### 其他外设
-- ✅ ​**STM32核心板板载资源**​：
-  - 用户LED（PC13）
-  - 复位按键
-  - Boot模式选择跳线
+- ✅ **旋转编码器**（旋钮位置检测）
+- ✅ **按键模块**（用户输入）
+- ✅ **LED模块**（状态指示）
 
 ## 💻 开发环境
 - Keil uVision5 MDK (v5.37+)
-- STM32F1xx_DFP 支持包（建议v2.4.0）
+- STM32F1xx_DFP 支持包（建议v2.4.0+）
+- STM32CubeMX（用于HAL库配置，可选）
 - ST-Link Utility / STM32CubeProgrammer
-- 串口调试工具（如Putty、XShell）
+- 串口调试工具（如Putty、XShell、串口调试助手）
 
-## 📂 工程结构
+## 📂 仓库结构
 ```bash
-Project/
-├── Hardware/                  # 用户自定义外设驱动
-│   ├── AD.c/h                # ADC数据采集
-│   ├── Buzzer.c/h            # 蜂鸣器控制
-│   ├── CountSensor.c/h       # 计数器传感器
-│   ├── DMA.c                 # DMA配置（用户层）
-│   ├── Encoder.c/h           # 编码器驱动
-│   ├── Encoder_interface.c/h # 编码器接口
-│   ├── IC.c/h                # 输入捕获
-│   ├── KEY.c/h               # 按键检测
-│   ├── LED.c/h               # LED控制
-│   ├── LightSensor.c/h       # 光传感器
-│   ├── Motor.c/h             # 电机驱动
-│   ├── MPU6050.c/h          # 陀螺仪驱动（含MPU6050_reg.h寄存器定义）
-│   ├── MyI2C.c/h            # GPIO模拟I2C协议
-│   ├── MySPI.c/h            # GPIO模拟SPI协议
-│   ├── OLED.c/h             # OLED显示屏驱动（含OLED_Font.h字库）
-│   ├── PWM.c/h              # PWM信号生成
-│   ├── Serial.c/h           # 串口通信
-│   ├── Servo.c/h            # 舵机控制
-│   └── W25Q64.c/h           # SPI Flash驱动（含W25Q64_Ins.h指令集）
-│
-├── Library/                  # STM32标准外设库（CMSIS + SPL）
-│   ├── CMSIS/                # Cortex-M3核心支持
-│   │   ├── stm32f10x.h       # 芯片寄存器映射
-│   │   ├── core_cm3.c/h      # Cortex-M3内核接口
-│   │   └── system_stm32f10x.c/h # 系统时钟初始化
-│   │
-│   ├── SPL/                  # 标准外设库（完整列表）
-│   │   ├── stm32f10x_adc.c/h        # ADC驱动
-│   │   ├── stm32f10x_bkp.c/h        # 备份寄存器
-│   │   ├── stm32f10x_can.c/h        # CAN总线
-│   │   ├── stm32f10x_cec.c/h        # HDMI-CEC
-│   │   ├── stm32f10x_crc.c/h        # CRC校验
-│   │   ├── stm32f10x_dac.c/h        # DAC驱动
-│   │   ├── stm32f10x_dbgmcu.c/h     # 调试MCU
-│   │   ├── stm32f10x_dma.c/h        # DMA控制器
-│   │   ├── stm32f10x_exti.c/h       # 外部中断
-│   │   ├── stm32f10x_flash.c/h      # Flash编程
-│   │   ├── stm32f10x_fsmc.c/h       # 静态存储器控制器
-│   │   ├── stm32f10x_gpio.c/h       # GPIO控制
-│   │   ├── stm32f10x_i2c.c/h        # I2C总线
-│   │   ├── stm32f10x_iwdg.c/h       # 独立看门狗
-│   │   ├── stm32f10x_pwr.c/h        # 电源控制
-│   │   ├── stm32f10x_rcc.c/h        # 复位与时钟控制
-│   │   ├── stm32f10x_rtc.c/h        # 实时时钟
-│   │   ├── stm32f10x_sdio.c/h       # SD卡接口
-│   │   ├── stm32f10x_spi.c/h        # SPI总线
-│   │   ├── stm32f10x_tim.c/h        # 定时器
-│   │   ├── stm32f10x_usart.c/h      # 串口通信
-│   │   ├── stm32f10x_wwdg.c/h       # 窗口看门狗
-│   │   └── misc.c/h                 # 中断优先级管理
-│
-├── Start/                     # 启动文件（根据芯片型号选择）
-│   ├── startup_stm32f10x_cl.s      # 互联型（Connectivity Line）
-│   ├── startup_stm32f10x_hd.s       # 大容量（High Density，Flash≥256KB）
-│   ├── startup_stm32f10x_hd_vl.s    # 大容量+超值型（Value Line）
-│   ├── startup_stm32f10x_ld.s       # 小容量（Low Density，Flash≤32KB）
-│   ├── startup_stm32f10x_ld_vl.s    # 小容量+超值型
-│   ├── startup_stm32f10x_md.s       # 中容量（Medium Density，64KB≤Flash≤128KB）
-│   ├── startup_stm32f10x_md_vl.s    # 中容量+超值型
-│   └── startup_stm32f10x_xl.s      # 超大容量（XL Density，Flash≥512KB）
-│
-├── System/                    # 系统级功能
-│   ├── DMA.c/h                # DMA通道管理
-│   ├── Timer.c/h              # 定时器基础配置
-│   └── Delay.c/h              # SysTick实现的精确延时
-│
-├── User/                      # 用户应用代码
-│   ├── main.c                 # 主程序入口
-│   ├── stm32f10x_it.c/h       # 中断服务函数
-│   └── stm32f10x_conf.h       # 库功能开关（如启用ADC/USART等）
-│
-├── MDK-ARM/                   # Keil工程文件
-│   ├── Project.uvprojx        # 工程主文件
-│   └── Project.uvoptx         # 调试配置（如断点、变量监视）
-│
-└── Utilities/                 # 实用工具
-    └── keilkill.bat           # 清理编译残留文件（*.o, *.axf等）
+STM32F103C8T6-Learning-Note/
+├── README.md                          # 主项目说明文档
+├── STM32F103C8T6HAL库学习工程/        # HAL库开发的工程示例
+│   ├── Doc/                          # 相关文档
+│   ├── Driver/                       # 驱动代码（BSP、CMSIS、FWLib等）
+│   ├── Output/                       # 编译输出文件
+│   ├── Project/                      # Keil工程文件
+│   ├── User/                         # 用户应用代码
+│   └── keilkill.bat                  # 清理脚本
+├── STM32F103C8T6标准库学习工程/      # 标准库开发的工程示例
+│   ├── Doc/                          # 相关文档
+│   ├── Driver/                       # 驱动代码
+│   ├── Output/                       # 编译输出文件
+│   ├── Project/                      # Keil工程文件
+│   ├── User/                         # 用户应用代码
+│   └── keilkill.bat                  # 清理脚本
+├── 标准库工程代码（旧）/              # 旧版标准库工程代码
+│   ├── Hardware/                     # 硬件驱动模块
+│   ├── Library/                      # STM32标准库文件
+│   ├── Start/                        # 启动文件
+│   ├── System/                       # 系统级功能模块
+│   ├── User/                         # 用户应用代码
+│   └── Project.uvprojx               # Keil工程文件
+├── 相关资料/                         # 技术文档和参考资料
+│   ├── STM32F103C8T6参考手册（中文）.pdf
+│   ├── STM32F103C8T6数据手册（中文/英文）.pdf
+│   ├── Cortex-M3权威指南.pdf
+│   └── 引脚定义图/表格
+├── 空白工程模板/                      # 各种开发方式的工程模板
+│   ├── STM32F03C8T6HAL库工程模板/    # HAL库工程模板
+│   ├── STM32F03C8T6标准库工程模板/  # 标准库工程模板
+│   └── STM32F03C8T6寄存器工程模板/  # 寄存器直接操作工程模板
+└── 笔记.pdf                          # 学习笔记
 ```
 
+## 🔍 工程介绍
+
+### HAL库学习工程
+基于STM32 HAL库开发的工程示例，包含以下特点：
+- 使用STM32 HAL库进行外设配置和驱动
+- 支持各种常用外设：GPIO、UART、TIMER、ADC等
+- 提供定时器、看门狗等功能模块
+- 结构化的代码组织，便于学习和扩展
+
+### 标准库学习工程
+基于STM32标准外设库（SPL）开发的工程示例，包含：
+- 标准库外设驱动示例
+- 基本的系统功能模块
+- 常用外设的使用示例
+
+### 标准库工程代码（旧）
+包含丰富的硬件驱动模块的标准库工程，具体实现了：
+- 各种传感器驱动（AD、光传感器、计数传感器等）
+- 通信协议实现（I2C、SPI模拟）
+- 显示设备驱动（OLED）
+- 运动控制（电机、舵机）
+- 存储模块（W25Q64 Flash）
+- 定时器高级应用（PWM、输入捕获）
+
+### 空白工程模板
+提供三种开发方式的空白工程模板：
+- HAL库工程模板：适合使用STM32CubeMX配置的项目
+- 标准库工程模板：使用传统标准外设库的项目
+- 寄存器工程模板：直接操作寄存器的项目
+
+## 🌟 示例功能汇总
+
+### 基础外设功能
+- ✅ **GPIO控制**：LED闪烁、按键检测
+- ✅ **串口通信**：USART收发、printf重定向
+- ✅ **定时器应用**：定时中断、PWM输出、输入捕获
+- ✅ **ADC采集**：模拟信号采样、传感器数据读取
+- ✅ **DMA传输**：数据高效传输、减轻CPU负担
+
+### 传感器应用
+- ✅ **环境监测**：光敏电阻、热敏电阻
+- ✅ **运动检测**：MPU6050姿态传感器
+- ✅ **距离测量**：超声波传感器
+- ✅ **物体检测**：红外反射/对射传感器
+
+### 输出设备控制
+- ✅ **显示控制**：OLED数据可视化
+- ✅ **声音输出**：蜂鸣器频率控制
+- ✅ **电机控制**：直流电机调速、舵机角度控制
+
+### 通信与存储
+- ✅ **通信协议**：GPIO模拟I2C/SPI
+- ✅ **外部存储**：W25Q64 Flash读写
+- ✅ **输入设备**：旋转编码器计数、按键输入
+
 ## 🚀 使用说明
-1. 克隆仓库：
-   ```bash
-   git clone https://github.com/xiaopang0808/STM32F103C8T6-Learning-Note.git
-   ```
-2. 使用Keil MDK5打开工程文件：  
-   `MDK-ARM/YourProjectName.uvprojx`
-3. 编译工程：`Project -> Build Target` (F7)
-4. 连接ST-Link调试器：
-   - 选择调试工具：`Project -> Options for Target -> Debug -> ST-Link Debugger`
-   - 确保开发板供电正常
-5. 下载程序：`Flash -> Download` (F8)
-6. 复位开发板观察现象
 
-## 🌟 示例功能
-当前工程已实现以下功能：
-- ✅ ​**LED闪烁**​（GPIO控制，基于 `Hardware/LED.c`）
-- ✅ ​**按键中断检测**​（支持长按/短按，基于 `Hardware/KEY.c`）
-- ✅ ​**USART1 串口通信**​（115200bps，支持printf重定向，基于 `Hardware/Serial.c`）
-- ✅ ​**PWM输出控制**​（调节LED亮度/舵机角度，基于 `Hardware/PWM.c`）
-- ✅ ​**ADC采集**​（光敏/热敏电阻信号，基于 `Hardware/AD.c`）
-- ✅ ​**蜂鸣器报警**​（支持频率调节，基于 `Hardware/Buzzer.c`）
-- ✅ ​**旋转编码器计数**​（EC11类型，基于 `Hardware/Encoder.c`）
-- ✅ ​**电机调速控制**​（TB6612驱动，基于 `Hardware/Motor.c`）
-- ✅ ​**OLED显示**​（实时数据可视化，基于 `Hardware/OLED.c`）
-- ✅ ​**MPU6050姿态检测**​（读取加速度/陀螺仪数据，基于 `Hardware/MPU6050.c`）
-- ✅ ​**外部Flash存储**​（W25Q64数据读写，基于 `Hardware/W25Q64.c`）
-- ✅ ​**红外传感器检测**​：
-  - 反射式（障碍物距离检测，基于 `Hardware/LightSensor.c`）
-  - 对射式（物体通过计数，基于 `Hardware/CountSensor.c`）
-- ✅ ​**DMA传输优化**​（ADC/USART数据高效传输，基于 `System/DMA.c`）
-- ✅ ​**定时器输入捕获**​（测量脉冲宽度，基于 `Hardware/IC.c`）
-- ✅ ​**SysTick精确延时**​（毫秒/微秒级，基于 `System/Delay.c`）
-- ✅ ​**GPIO模拟I2C/SPI协议**​（兼容无硬件外设场景，基于 `Hardware/MyI2C.c` 和 `Hardware/MySPI.c`）
+### 1. 获取项目
+```bash
+git clone https://github.com/xiaopang0808/STM32F103C8T6-Learning-Note.git
+```
 
-📍 ​**待实现功能**​：
-- 多机CAN总线通信
-- FATFS文件系统移植
-- FreeRTOS任务调度
+### 2. 打开工程
+根据需要选择合适的工程目录：
+- HAL库工程：`STM32F103C8T6HAL库学习工程/Project/`
+- 标准库工程：`STM32F103C8T6标准库学习工程/Project/`
+- 旧版标准库：`标准库工程代码（旧）/Project.uvprojx`
+
+使用Keil MDK5打开对应的`.uvprojx`文件。
+
+### 3. 编译与下载
+1. 编译工程：`Project -> Build Target` (F7)
+2. 连接ST-Link调试器
+3. 配置调试工具：`Project -> Options for Target -> Debug -> ST-Link Debugger`
+4. 下载程序：`Flash -> Download` (F8)
+5. 运行程序：可以选择`Debug -> Start/Stop Debug Session`进行调试，或直接按下复位按钮运行
+
+### 4. 使用空白模板
+如果需要创建新项目，可以从`空白工程模板`目录复制对应的模板，并根据需要修改。
 
 ## ⚠️ 注意事项
-1. ​**开发环境配置**​  
-   - 首次使用需通过Keil Pack Installer安装 ​**STM32F1xx_DFP**​ 支持包（v2.4.0+）  
-   - 检查标准库完整性：确保 `Library` 目录包含完整STM32F10x标准外设库文件（如 `stm32f10x_gpio.c`、`stm32f10x_rcc.c` 等）
 
-## ⚠️ 注意事项
-2. ​**硬件适配修改**​  
-   - ​**时钟配置**​：在 `System/system_stm32f10x.c` 中修改 `HSE_VALUE`（**默认为8MHz**，需与外部晶振实际频率一致，本工程通过PLL倍频至72MHz系统时钟）  
-   - ​**引脚定义**​：根据核心板原理图修改以下文件中的引脚：  
-     ```c
-     Hardware/LED.h       // LED引脚
-     Hardware/KEY.h       // 按键引脚
-     Hardware/OLED.h      // OLED的I2C/SPI接口引脚
-     ```
-   - ​**通信参数**​：在 `Hardware/Serial.h` 中修改串口波特率（默认115200）
+### 1. 开发环境配置
+- 首次使用需通过Keil Pack Installer安装**STM32F1xx_DFP**支持包
+- 确保安装了正确版本的Keil MDK5（建议v5.37+）
+- HAL库工程可能需要安装STM32CubeMX生成配置代码
 
-3. ​**外设模块依赖**​  
-   - ​**I2C/SPI冲突**​：若同时使用MPU6050（I2C）和W25Q64（SPI），需检查总线引脚是否冲突  
-   - ​**传感器电压**​：光敏/热敏电阻模块需接3.3V，避免5V烧毁STM32 ADC引脚  
-   - ​**电机供电隔离**​：TB6612模块的电机电源（VM）与STM32逻辑电源需隔离
+### 2. 硬件适配
+- **时钟配置**：根据实际硬件修改外部晶振频率（默认为8MHz）
+- **引脚定义**：不同工程可能有不同的引脚定义，使用前请确认与硬件连接一致
+- **电源要求**：电机等大功率设备需要单独供电，避免影响STM32正常工作
 
-4. ​**工程配置建议**​  
-   - ​**启动文件**​：确认 `Start/` 目录下选择正确的启动文件（STM32F103C8T6为中等容量，应选 `startup_stm32f10x_md.s`）  
-   - ​**优化等级**​：在Keil中设置 `Optimization Level -O0` 避免某些外设驱动异常（如MyI2C的延时函数）  
-   - ​**下载器配置**​：ST-Link需连接 `SWDIO` 和 `SWCLK` 引脚，并在Keil中启用 `Reset and Run`
+### 3. 工程配置
+- **启动文件选择**：STM32F103C8T6为中容量芯片，标准库应选择`startup_stm32f10x_md.s`
+- **优化等级**：部分驱动代码对优化敏感，建议初学者使用`-O0`优化等级
+- **内存限制**：注意STM32F103C8T6仅有64KB Flash和20KB RAM
 
-5. ​**关键文件说明**​  
-   - `stm32f10x_conf.h`：启用/禁用外设编译（如未使用CAN总线可注释 `#define _CAN`）  
-   - `stm32f10x_it.c`：添加自定义中断服务函数（如编码器中断）  
-   - `System/Delay.c`：若需高精度延时，需校准 `SysTick` 时钟源  
-
-6. ​**调试提示**​  
-   - 若OLED无显示：检查是否在 `OLED_Init()` 中正确配置I2C地址（默认0x78）  
-   - 若MPU6050数据异常：检查 `MyI2C.c` 中的时序延时是否匹配模块要求  
-   - 若Flash写入失败：确认 `W25Q64.c` 中已解除写保护（发送 `0x01, 0x00` 指令）  
-
-7. ​**资源占用**​  
-   - 编译后 `Program Size` 应小于64KB（STM32F103C8T6 Flash容量）  
-   - 若内存不足，可在 `Target Options -> C/C++` 中勾选 `One ELF Section per Function` 优化  
+### 4. 调试建议
+- 使用串口打印进行调试是最常用的方法
+- OLED显示可用于实时监控数据变化
+- 使用ST-Link进行在线调试可观察变量和程序执行流程
 
 ## 📜 许可证
 本项目采用 [MIT License](LICENSE)，欢迎学习与二次开发。
